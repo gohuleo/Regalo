@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Animada</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: url('background.png') no-repeat center center fixed;
+            background-size: 1920px 110vh;
+            animation: moveBackground 60s linear infinite alternate;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        @keyframes moveBackground {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 25% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        .card-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: floatCard 2s ease-in-out infinite alternate;
+        }
+
+        .wing {
+            position: absolute;
+            width: 120px;
+            height: 100%;
+        }
+
+        .wing.left {
+            top: 50%;
+            left: -130px;
+            transform: translateY(-50%);
+            background: url('wings.png') no-repeat center;
+            background-size: contain;
+        }
+
+        .wing.right {
+            top: 50%;
+            right: -130px;
+            transform: translateY(-50%) scaleX(-1);
+            background: url('wings.png') no-repeat center;
+            background-size: contain;
+        }
+
+        @keyframes floatCard {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card">
+            <div class="wing left"></div>
+            <div class="wing right"></div>
+        </div>
+    </div>
+</body>
+</html>

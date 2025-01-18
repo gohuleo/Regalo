@@ -5,88 +5,239 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carta Animada</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background: url('background.png') no-repeat center center fixed;
-            background-size: 1920px 110vh;
-            animation: moveBackground 60s linear infinite alternate;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
+
+    *{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+    
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #ffcacf;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .card-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.02);
+        -webkit-backdrop-filter: blur(1px);
+        backdrop-filter: blur(1px);
         }
 
-        @keyframes moveBackground {
+    .card {
+        position: relative;
+        width: 400px;
+        height: 251px;
+        background: url('letter.png') no-repeat;
+        background-size: contain;
+        border-radius: 15px;
+        box-shadow: 5px 4px 8px rgba(0, 0, 0, 0.07);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: floatCard 2s ease-in-out infinite alternate;
+    }
+
+    .main-button{
+        width: 400px;
+        height: 251px;
+        background-color: transparent;
+        border-style: none;
+        border-radius: 15px;
+    }
+
+    .main-button:hover{
+        cursor: pointer;
+    }
+
+    .wing {
+        position: absolute;
+        width: 170px;
+        height: 200%;
+    }
+
+    .wing.left {
+        top: 50%;
+        left: -200px;
+        background: url('wings.png') no-repeat center;
+        background-size: contain;
+        animation: wingLeft 2s infinite alternate;
+    }
+
+    .wing.right {
+        top: 50%;
+        right: -200px;
+        background: url('wings.png') no-repeat center;
+        background-size: contain;
+        animation: wingRight 2s infinite alternate;
+    }
+
+    @keyframes floatCard {
+        from {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes wingLeft {
+        from {
+            transform: rotate(0turn) translateY(-50%);;
+        }
+        to {
+            transform: rotate(0.008turn) translateY(-50%);;
+        }
+    }
+
+    @keyframes wingRight {
+        from {
+            transform: rotate(-0turn) translateY(-50%) scaleX(-1);;
+        }
+        to {
+            transform: rotate(-0.008turn) translateY(-50%) scaleX(-1);;
+        }
+    }
+
+    .clouds.bottom, .clouds.topm, .hearts{
+        background-size: contain;
+        position: absolute;
+    }
+
+    .hearts {
+        height: 100%;
+        width: 100%;
+        background: url('hearts.png') repeat center;
+        animation: floatHearts linear infinite alternate;
+    }
+
+    .clouds{
+        animation: floatHearts linear infinite alternate;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+    }
+
+    .clouds.bottom{
+        background: url('clouds_bottom.png') repeat-x;
+        top: 64vh;
+    }
+
+    .clouds.top{
+        background: url('clouds_top.png') repeat-x;
+    }
+
+    /* Responsive animation */
+
+    @media screen and (max-width: 800px) {
+        .hearts, .clouds{
+            animation-duration: 40s;
+        }
+        
+        @keyframes floatHearts {
             0% {
-                background-position: 0 0;
+                background-position: left 0% bottom 100%;
             }
             50% {
-                background-position: 25% 0;
+                background-position: left 15% bottom 100%;
             }
             100% {
-                background-position: 0 0;
+                background-position: left 0% bottom 100%;
             }
         }
-
-        .card-container {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+    }
+    @media screen and (min-width: 801px) {
+        .hearts, .clouds{
+            animation-duration: 30s;
         }
-
-        .card {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            background: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: floatCard 2s ease-in-out infinite alternate;
-        }
-
-        .wing {
-            position: absolute;
-            width: 120px;
-            height: 100%;
-        }
-
-        .wing.left {
-            top: 50%;
-            left: -130px;
-            transform: translateY(-50%);
-            background: url('wings.png') no-repeat center;
-            background-size: contain;
-        }
-
-        .wing.right {
-            top: 50%;
-            right: -130px;
-            transform: translateY(-50%) scaleX(-1);
-            background: url('wings.png') no-repeat center;
-            background-size: contain;
-        }
-
-        @keyframes floatCard {
-            from {
-                transform: translateY(0);
+        
+        @keyframes floatHearts {
+            0% {
+                background-position: left 0% bottom 100%;
             }
-            to {
-                transform: translateY(-20px);
+            50% {
+                background-position: left 70% bottom 100%;
+            }
+            100% {
+                background-position: left 0% bottom 100%;
             }
         }
+    }
+
+    .outGift{
+        visibility: hidden;
+        position: absolute;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        opacity: 0.5;
+        background: rgb(0 0 0 / 70%);
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+    }
+    .gift{
+        visibility: hidden;
+        background: #fcf4f5;
+        position: absolute;
+        align-items: center;
+        height: 400px;
+        width: 400px;
+        border: #edb5be 20px solid;
+        border-radius: 5px;
+    }
+    .gift p{
+        left: 5%;
+        font-size: 20px;
+        color: black;
+        border-bottom: #edb5be 5px solid;
+        margin: 12px;
+        margin-bottom: -7px;
+    }
+    .finalP{
+        margin-bottom: 28px;
+    }
     </style>
 </head>
 <body>
+    <div class="hearts"></div>
+    <div class="clouds">
+        <div class="clouds top"></div>
+        <div class="clouds bottom"></div>
     <div class="card-container">
         <div class="card">
+            <button class="main-button" onclick="gift()"></button>
             <div class="wing left"></div>
             <div class="wing right"></div>
+        </div>
+        <div class="outGift" onclick="outGift()"></div>
+        <div class="gift">
+            <p>Te amo mucho mi amor, sos el amor de</p>
+            <p class="finalP">mi vida.</p>
+            <p>Gracias por cada momento juntos, por</p>
+            <p>cada risa, por cada segundo con tú</p>
+            <p class="finalP">compañía.</p>
+            <p>Feliz San Valentín y pronto medio año</p>
+            <p class="finalP">juntos.</p>
         </div>
     </div>
 </body>
 </html>
+<script>
+    function gift(){
+        document.querySelector(".gift").style.visibility = "visible"; 
+        document.querySelector(".outGift").style.visibility = "visible"; 
+    }
+    function outGift(){
+        document.querySelector(".gift").style.visibility = "hidden";
+        document.querySelector(".outGift").style.visibility = "hidden";
+    }
+</script>
